@@ -1,0 +1,213 @@
+1 2 3 4 5 6 7 8 9 
+=================================
+Rajesh Kumar
+8105843520
+===================
+Kubernetes
+=========================
+Docker - Container
+=========================
+================================
+8:30 AM IST - 5:00 PM IST
+===========================
+1 Lunch - 1-2 PM 
+2 Tea Break. - 15mins - 10:30 & 3:00 PM
+=============================================
+Lab - AWS
+====================================
+1 Good Name - Ur expectecations.
+=============================================
+API `	Server
+----	------
+It is a server of multiple API.
+		What API?
+=====================================================			
+PHYSCIAL Server		Vm 			Container 				POD
+is running		is running		is running				is running
+================================================================
+PID1			PID1			PID1					ALL Container is running
+============================================================
+SYSTEMD			SYSTEMD			ANYTHING	
+
+===============================================================================================
+
+Master
+==================================
+- API Server - POD -> Container -> Image -> Google Registy
+- Clustor Store  - POD -> Container -> Image -> Google Registy
+- Controller Mgr  - POD -> Container -> Image -> Google Registy
+- Schedular  - POD -> Container -> Image -> Google Registy
+ 
+- Kubelet
+- Docker
+- Kube Proxy - POD -> Container -> Image -> Google Registy
+
+Worker
+==================================
+- Kubelet
+- Docker Engine
+- Kube Proxy
+
+Workstation
+==================================
+kubectl
+
+Single Node Clustor - Learning Purpose
+==============================
+minikube.exe
+		- Download VM iso
+		- Create a Vm [ virtualbox]
+		- Run a VM
+		- Configure Single Node Clustor
+
+Manual Way 
+==============================
+	Physcal Machine
+	VMs
+	- Using kubeadm
+
+On the Cloud and Integrate with Cloud services	
+==============================
+		- AWS 
+		- GC
+		- VSph
+	Using KOPS
+
+Hosted Solution
+==============================
+	EKS 
+	AKS - Azure k8 service
+	GKE
+
+
+13.127.38.15
+centos
+PPK - 
+=================================================================
+Docker
+kubeadm
+kubectl
+kubelet
+https://www.devopsschool.com/tutorial/docker/install-config/docker-install-commuityedition-centos-rhel.html
+
+https://www.devopsschool.com/blog/setting-up-kubernetes-clusters-using-kubeadm-manual-way-in-rhel-7-centos7/
+
+DO NOT DO - Step 1 / Step 2 / Step 3 / Step 4
+Cont from Step 5 - Step 5
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.5.14:6443 --token pbbmr9.5lo7myh8k8bgrcoe \
+    --discovery-token-ca-cert-hash sha256:f02600ccd21699da6ad6d65643f1d19164e418a61e65b9cb54cf5e2373553f22
+
+=================================================================
+Setup workstation
+=================================================================
+
+
+kubectl
+	CURR_LOCA/.kube/config
+	USER_HOME/.kube/config
+	ENV KUBE_CONFIG ANY/config
+				
+
+
+	How to login to clustor
+		- ApI SERVER
+		- cERTIFICATE
+
+config
+	clustor(S)
+		clustor1 = http:/ip:port
+		clustor2 = http:/ip:port
+		clustor3 = http:/ip:port
+	user(s)
+		user1 = client key and cert
+		user2 = client key and cert
+		user3 = client key and cert
+
+	context(s)
+		context1 = clustor1 + user3  
+		context2 = clustor2 + user2 
+		context3 = clustor3 + user1 
+	curr-conext
+		= context1  or context2 or context3
+
+
+$ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+$ kubectl get nodes
+$ kubectl get pods --all-namespaces
+$ kubectl get nodes
+
+   10  kubectl cluster-info
+   11  kubectl get nodes
+   12  clear
+   13  kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+   14  kubectl get nodes
+   15  watch kubectl get nodes
+   16  clear
+   17  kubectl get pods --all-namespace
+   18  kubectl get pods --all-namespaces
+   19  ps -eaf | grep docker
+   20  clear
+   21  ps -eaf | grep kubelet
+   22  kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+   23  clear
+   24  watch kubectl get nodes
+   25  history
+
+===========================================
+Worker
+13.235.114.58
+====================================================
+MASTER
+====================================================
+Jagannath Nagoji	13.235.91.237
+Gandharva S	15.207.89.7
+Reubenur Rahman	13.126.229.6
+Obul Reddy Pothu	15.207.20.167
+Kalpana Kandhamaran	13.232.144.251
+Asha Francis	3.7.46.251
+Suresh Jaganathan	13.126.55.0
+Sasmita Nahak	13.235.78.247
+Surabhi S	13.233.255.133
+Sathiyaraj S	13.232.176.206
+Sriram PH	13.233.139.212
+Radhakrushna M V	35.154.103.210
+Nalina M	15.206.210.41
+Juigil Kishore	15.207.109.143
+Ahfaz Qureshi	15.206.195.57
+
+
+====================================================
+WORKER
+====================================================
+Jagannath Nagoji	13.233.114.34
+Gandharva S	15.206.67.94
+Reubenur Rahman	13.232.135.230
+Obul Reddy Pothu	13.235.45.131
+Kalpana Kandhamaran	13.233.93.65
+Asha Francis	13.126.94.222
+Suresh Jaganathan	13.126.24.111
+Sasmita Nahak	52.66.207.5
+Surabhi S	13.127.164.214
+Sathiyaraj S	13.233.129.212
+Sriram PH	13.233.183.159
+Radhakrushna M V	13.232.94.178
+Nalina M	13.234.48.188
+Juigil Kishore	52.66.63.235
+Ahfaz Qureshi	13.234.19.14
+
+
+
+
