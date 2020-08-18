@@ -225,5 +225,67 @@ How to know each Api Resources and their fiels and their types and required or o
   253  clear
   254  kubectl explain pod.spec.containers.ports
   255  history
+========================================================================
+========================================================================
+RC
+=============================
+Replication Controller
+	Replication - POD to Many
+	Controller -  Would make sure that it control a desire of PODs == Actual num of PODS
+==================================================================
+
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: hello-rc
+spec:
+  replicas: 2   
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-ctr
+        image: scmgalaxy/nginx-devopsschoolv1
+        ports:
+        - containerPort: 80
+
+
+ 311  cd rajesh/
+  312  clear
+  313  ls
+  314  vi rc1.yaml
+  315  kubectl create -f rc1.yaml -n=rajesh
+  316  kubectl get rc
+  317  kubectl get rc -n=rajesh
+  318  clear
+  319  ls
+  320  kubectl describe rc hello-rc -n=rajesh
+  321  clear
+  322  kubectl get pods
+  323  kubectl get pods -n=rajesh
+  324  kubectl describe pods hello-rc-jdjbp -n=rajesh
+  325  clear
+  326  ls
+  327  vi rc1.yaml
+  328  kubectl apply -f rc1.yaml -n=rajesh
+  329  kubectl get pods -n=rajesh
+  330  clear
+  331  ls
+  332  kubectl get pods -n=rajesh
+  333  kubectl delete pod hello-rc-jdjbp hello-rc-nm9lp -n=rajesh
+  334  kubectl get pods -n=rajesh
+  335  kubectl edit rc hello-rc -n=rajesh
+  336  kubectl get pods -n=rajesh
+  337  history
+
+
+
+
+
+
+
 
 
