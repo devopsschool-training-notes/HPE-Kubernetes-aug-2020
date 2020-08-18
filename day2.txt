@@ -1,0 +1,229 @@
+Workstation - 13.235.86.10
+centos
+====================================================================
+API OBJECTS
+=================================
+NS
+Pods
+RC
+Deployment
+-------------
+Service 
+
+
+
+  32  kubecelt get nodes
+   33  kubectl get nodes
+   34  clear
+   35  ls
+   36  kubectl
+   37  clear
+   38  kubectl
+   39  clear
+   40  kubectl api-resources
+   41  clear
+   42  kubectl api-resources
+   43  clear
+   44  kubectl
+   45  clear
+   46  kubectl api-resources
+   47  clear
+   48  kubectl get ns
+   49  kubectl api-resources
+   50  cleart
+   51  clear
+   52  kubectl
+   53  kubectl api-versions
+   54  clear
+   55  history
+=================================================
+=================================================
+CRUD
+-------------------------------------------------
+API 
+	Create
+		CMD
+			create
+		YAML
+			create -f 
+	READ		
+		CMD
+			get
+			describe
+			logs
+
+	UPDATE
+		CMD
+			edit
+		YAML
+			apply
+	Delete
+		CMD
+			delete
+		YAML
+			delete -f
+=======================================================
+
+ 133  kubectl describe ns rajesh
+  134  kubectl edit ns rajesh
+  135  kubectl delete ns qa dev
+  136  clear
+  137  ls
+  138  kubectl get ns
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod-rajesh
+  labels: 
+    app: webserver
+    software: rajesh
+spec:
+  containers:
+  - name: hello-ctr
+    image: nginx
+    ports:
+    - containerPort: 80
+
+ 139  history
+  140  clear
+  141  ls
+  142  clear
+  143  kubectl create -h
+  144  clear
+  145  ls
+  146  pwd
+  147  git
+  148  yum install git -y
+  149  sudo yum install git -y
+  150  clear
+  151  ls
+  152  git clone https://github.com/devopsschool-training-notes/HPE-Kubernetes-aug-2020
+  153  ls
+  154  cd HPE-Kubernetes-aug-2020/
+  155  ls
+  156  clear
+  157  ls
+  158  mkdir rajesh
+  159  ls
+  160  pwd
+  161  ls
+  162  cd rajesh
+  163  clear
+  164  ls
+  165  clear
+  166  ls
+  167  vi pod1.yaml
+  168  kubectl create -f pod1.yaml
+  169  kubeget pods
+  170  kubectl get pods
+  171  kubectl get pods -n=rajesh
+  172  kubectl get pods
+  173  kubectl create -f pod1.yaml
+  174  kubectl create -f pod1.yaml -n=rajesh
+  175  kubectl get pods -n=rajesh
+  176  kubectl describe pod hello-pod-rajesh -n=rajesh
+  177  clear
+  178  ls
+  179  kubectl get pods -n=rajesh
+  180  kubectl logs hello-pod-rajesh -n=rajesh
+  181  kubectl edit pod hello-pod-rajesh -n=rajesh
+  182  kubectl describe pod hello-pod-rajesh -n=rajesh
+  183  clear
+  184  ls
+  185  vi pod1.yaml
+  186  kubectl apply -f pod1.yaml -n=rajesh
+  187  kubectl describe pod hello-pod-rajesh -n=rajesh
+  188  clear
+  189  ls
+  190  kubectl get pods
+  191  kubectl get pods -n=rajesh
+  192  kubectl get pods -n=rajesh -o wide
+  193  kubectl get pods -n=rajesh -o wide --show-labels
+  194  kubectl get -h
+  195  clear
+  196  ls
+  197  kubectl get -h
+  198  clear
+  199  kubectl get pods -n=rajesh -o wide --show-labels
+  200  curl http://10.44.0.2
+  201  clear
+  202  ls
+
+
+How to use a PODS
+===========================
+How to access a PODS(container) from Outside?
+
+  199  kubectl get pods -n=rajesh -o wide --show-labels
+  200  curl http://10.44.0.2
+
+How to go inside a PODS(container) from Outside?
+
+docker exec -it contid /bin/bash
+docker attach [ to become a container]
+
+kubectl exec -it hello-pod-rajesh /bin/bash -n=rajesh
+kubectl attach [ to become a container]
+
+ 203  history
+  204  clear
+  205  kubectl get pods -n=rajesh
+  206  kubectl exec -it hello-pod-rajesh /bin/bash -n=rajesh
+  207  clear
+  208  ps
+  209  kubectl get pod -n=rajesh
+  210  kubectl attach hello-pod-rajesh -n=rajesh
+  211  clear
+  212  kubectl get pod -n=rajesh
+  213  history
+
+   43  kubectl get pods -n=rajesh -o wide
+   44  curl http://10.44.0.2
+   45  clear
+
+
+  219  kubectl get pods -n=rajesh
+  220  ls
+  221  touch devopsschool.com
+  222  vi devopsschool.com
+  223  kubectl cp devopsschool.com hello-pod-rajesh:/opt
+  224  kubectl cp -h
+  225  clear
+  226  ls
+  227  kubectl get pods =n=rajesh
+  228  kubectl get pods -n=rajesh
+  229  kubectl exec hello-pod-rajesh ls /opt
+==============================================================
+ 231  clear
+  232  kubectl
+  233  clear
+  234  ls
+  235  kubectl exec -h
+  236  clear
+=====================================================================
+
+How to know each Api Resources and their fiels and their types and required or optional????
+
+
+ 238  clear
+  239  kubectl
+  240  clear
+  241  kubectl explain ns
+  242  clear
+  243  kubectl explain ns.spec
+  244  kubectl explain ns
+  245  kubectl explain ns.metadata
+  246  clear
+  247  kubectl explain pod
+  248  clear
+  249  kubectl explain pod.spec
+  250  kubectl explain pod.spec.serviceAccount
+  251  clear
+  252  kubectl explain pod.spec.containers
+  253  clear
+  254  kubectl explain pod.spec.containers.ports
+  255  history
+
+
