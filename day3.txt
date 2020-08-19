@@ -1,0 +1,77 @@
+Service Types
+===================================
+ClustorIp	(Default)
+
+NodePort
+		One ClustorIp Service get created &
+		That service get exposed to each node of the clustor
+LoadBalancer
+		One ClustorIp Service get created &
+		That service get exposed to each node of the clustor
+		One Ext LB get created and each node of the clustor get LB by Ext LB
+ExternalName
+
+
+
+kubectl create service clusterip my-cs --tcp=8080:80 -n=rajesh
+
+
+ 1022  kubectl create -h
+ 1023  clear
+ 1024  ls
+ 1025  kubectl create service -h
+ 1026  kubectl create service clusterip -h
+ 1027  clear
+ 1028  ls
+ 1029  kubectl create service clusterip my-cs --tcp=8080:80 -n=rajesh
+ 1030  kubectl get svc
+ 1031  kubectl get svc -n=rajesh
+ 1032  ping 10.111.29.77
+ 1033  kubectl describe svc my-cs -n=rajesh
+ 1034  kubectl get pods
+ 1035  kubectl describe svc my-cs -n=rajesh
+ 1036  kubectl describe svc my-cs -n=rajesh --show-lables
+ 1037  kubectl describe svc my-cs -n=rajesh --show-labels
+ 1038  kubectl describe svc my-cs -n=rajesh --show-label
+ 1039  kubectl describe svc my-cs -n=rajesh --show-labels
+ 1040  kubectl get svc my-cs -n=rajesh --show-labels
+ 1041  clwar
+ 1042  clear
+ 1043  kubectl get svc my-cs -n=rajesh --show-labels
+ 1044  kubectl get pods -n=rajesh --show-labels
+ 1045  kubectl edit svc my-cs -n=rajesh
+ 1046  kubectl get pods -n=rajesh --show-labels
+ 1047  kubectl get svc my-cs -n=rajesh --show-labels
+ 1048  kubectl describe svc my-cs -n=rajesh --show-labels
+ 1049  kubectl describe svc my-cs -n=rajesh
+ 1050  kubectl edit svc my-cs -n=rajesh
+ 1051  kubectl describe svc my-cs -n=rajesh
+ 1052  kubectl get pods -n=rajesh -o wide
+ 1053  kubectl get svc -n=rajesh
+ 1054  curl http://10.111.29.77
+ 1055  curl http://10.111.29.77:8080
+ 1056  clear
+ 1057  ls
+ 1058  kubectl creat -f dep2.yaml -n=rajesh
+ 1059  kubectl create -f dep2.yaml -n=rajesh
+ 1060  kubectl get pods -n=rajesh
+ 1061  clear
+ 1062  kubectl get pods -n=rajesh --show-labels
+ 1063  kubectl edit svc my-cs -n=rajesh
+ 1064  kubectl describe svc my-cs -n=rajesh
+ 1065  clear
+ 1066  kubectl edit svc my-cs -n=rajesh
+ 1067  kubectl describe svc my-cs -n=rajesh
+ 1068  ls
+ 1069  history
+ 1070  vi dep2.yaml
+ 1071  kubectl describe svc my-cs -n=rajesh
+ 1072  vi dep2.yaml
+ 1073  kubectl describe svc my-cs -n=rajesh
+ 1074  vi dep2.yaml
+ 1075  kubectl apply -f dep2.yaml -n=rajesh
+ 1076  vi dep2.yaml
+ 1077  kubectl apply -f dep2.yaml -n=rajesh
+ 1078  kubectl get pods -n=rajesh --show-labels
+ 1079  kubectl describe svc my-cs -n=rajesh
+ 1080  history
