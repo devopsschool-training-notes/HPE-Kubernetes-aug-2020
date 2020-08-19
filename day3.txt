@@ -121,5 +121,240 @@ app=my-dep
  1113  curl http://10.105.122.172:5678
  1114  history
 
+=======================================
+emptydir
+===================================
+https://www.devopsschool.com/blog/kubernetes-volume-emptydir-explained-with-examples/
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pd
+spec:
+  containers:
+  - image: scmgalaxy/nginx-devopsschoolv1
+    name: test-container
+    volumeMounts:
+    - mountPath: /cache
+      name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir: {}
+
+
+
+
+
+
+
+$ kubectl get pods -n <namespace> <pod-name> -o jsonpath='{.metadata.uid}'
+$ kubectl get pods -n kube-system kubedb-66f78 -o jsonpath='{.metadata.uid}'
+275ecb36-5aa8-4c2a-9c47-d8bb681b9aff⏎
+
+kubectl get pods -n rajesh test-pd -o jsonpath='{.metadata.uid}'
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pd
+spec:
+  containers:
+  - image: scmgalaxy/nginx-devopsschoolv1
+    name: test-container
+    volumeMounts:
+    - mountPath: /test-pd
+      name: test-volume
+  volumes:
+  - name: test-volume
+    hostPath:
+      # directory location on host
+      path: /data
+      # this field is optional
+      type: DirectoryOrCreate
+
+
+PV and PVC
+https://www.devopsschool.com/blog/persistentvolume-persistentvolumeclaim-volumes-using-hostpath/
+
+
+
+
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: hostpath
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/devopsschool"
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: hostpath1
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/devopsschool"
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvchostpath
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvchostpath1
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: task-pv-pod
+spec:
+  containers:
+    - name: task-pv-container
+      image: scmgalaxy/nginx-devopsschoolv1
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: pvchostpath
+
+
+
+
+
+ 1005  ls
+ 1006  vi emptydir.yaml
+ 1007  kubectl create -f emptydir.yaml -n=rajesh
+ 1008  kubectl get pods -n=rajesh
+ 1009  clear
+ 1010  kubectl exec -it test-pd -n=rajesh
+ 1011  kubectl exec -it test-pd /bin/bash -n=rajesh
+ 1012  cd /var/lib/kubelet/pods/{
+ 1013  cd /var/lib/kubelet/pods
+ 1014  sudo cd /var/lib/kubelet/pods
+ 1015  ls
+ 1016  pwd
+ 1017  sudo -s
+ 1018  kubectl get pods -n=rajesh
+ 1019  kubectl describe pod test-pd -n=rajesh
+ 1020  clear
+ 1021  ls
+ 1022  kubectl get pods -n=rajesh
+ 1023  kubectl describe pod test-pd -n=rajesh -o wide
+ 1024  kubectl get pod test-pd -n=rajesh -o wide
+ 1025  kubectl get pods
+ 1026  kubectl get pods -n=rajesh
+ 1027  clear
+ 1028  kubectl get pods -n rajesh test-pd -o jsonpath='{.metadata.uid}'
+ 1029  kubectl get pods -n rajesh test-pd
+ 1030  kubectl get pods -n rajesh test-pd -o
+ 1031  kubectl get pods -n rajesh test-pd -o json
+ 1032  clear
+ 1033  ls
+ 1034  sudo -s]
+ 1035  sudo -s
+ 1036  kubectl get pods -n rajesh test-pd -o jsonpath='{.metadata.uid}'
+ 1037  clear
+ 1038  sudo -s
+ 1039  kubectl get pods -n rajesh
+ 1040  kubectl exec test-pd ls /cache
+ 1041  cleae
+ 1042  clear
+ 1043  kubectl exec test-pd ls /cache -n=rajesh
+ 1044  clear
+ 1045  kubectl get pods -o wide -n=rajesh
+ 1046  kubectl delete pod test-pd -n=rajesh
+ 1047  clear
+ 1048  ls
+ 1049  vi hostpath
+ 1050  vi hostpath.yaml
+ 1051  kubectl create -f hostpath.yaml -n=rajesh
+ 1052  kubectl get pods
+ 1053  kubectl get pods -n=rajesh
+ 1054  kubectl get pods -n=rajesh -o wide
+ 1055  kubectl exec test-pd touch /test-pd/raju.txt
+ 1056  kubectl exec test-pd touch /test-pd/raju.txt -n=rajesh
+ 1057  kubectl exec test-pd touch ls /test-pd -n=rajesh
+ 1058  kubectl exec test-pd ls /test-pd -n=rajesh
+ 1059  clear
+ 1060  ls
+ 1061  kubectl delte pod test-pd -n=rajesh
+ 1062  kubectl delete pod test-pd -n=rajesh
+ 1063  kubectl create -f hostpath.yaml -n=rajesh
+ 1064  kubectl get pods -n=rajesh -o wide
+ 1065  kubectl exec test-pd ls /test-pd -n=rajesh
+ 1066  clear
+ 1067  ls
+ 1068  vi pv1.yaml
+ 1069  vi pv2.yaml
+ 1070  kubectl create -f pv1.yaml
+ 1071  kubectl create -f pv2.yaml
+ 1072  clear
+ 1073  ls
+ 1074  kubectl get pv
+ 1075  kubectl get pv -n=rajesh
+ 1076  vi pvc1.yaml
+ 1077  vi pvc2.yaml
+ 1078  kubectl create -f pvc1.yaml -n=rajesh
+ 1079  kubectl get pv
+ 1080  kubectl create -f pvc2.yaml -n=rajesh
+ 1081  vi pvc2.yaml
+ 1082  kubectl create -f pvc2.yaml -n=rajesh
+ 1083  clear
+ 1084  kubectl get pv
+ 1085  kubectl get pvc -n=rajesh
+ 1086  vi pvc2.yaml
+ 1087  kubectl apply -f pvc2.yaml -n=rajesh
+ 1088  kubectl delete -f pvc2.yaml -n=rajesh
+ 1089  kubectl apply -f pvc2.yaml -n=rajesh
+ 1090  kubectl get pvc -n=rajesh
+ 1091  kubectl get pv
+ 1092  clear
+ 1093  kubectl get pvc -n=rajesh
+ 1094  vi podpvc.yaml
+ 1095  kubectl create -f podpvc.yaml -n=rajesh
+ 1096  kubectl get pvc -n=rajesh
+ 1097  history
+
+
+
 
 
