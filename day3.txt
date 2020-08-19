@@ -75,3 +75,51 @@ kubectl create service clusterip my-cs --tcp=8080:80 -n=rajesh
  1078  kubectl get pods -n=rajesh --show-labels
  1079  kubectl describe svc my-cs -n=rajesh
  1080  history
+==================================
+
+
+kubectl create service nodeport my-ns --tcp=5678:80 -n=rajesh
+
+ 1081  clear
+ 1082  kubectl get svc -n=rajesh
+ 1083  kubectl create svc -h
+ 1084  kubectl create svc nodeport -h
+ 1085  clear
+ 1086  kubectl get svc -n=rajesh
+ 1087  kubectl create service nodeport my-ns --tcp=5678:80 -n=rajesh
+ 1088  kubectl get pods --show-labels -n=rajesh
+ 1089  clear
+ 1090  kubectl get svc -n=rajesh
+ 1091  kubectl describe svc my-ns -n=rajesh
+ 1092  kubectl edit svc my-ns -n=rajesh
+ 1093  kubectl describe svc my-ns -n=rajesh
+ 1094  clear
+ 1095  kubectl get svc -n=rajesh
+ 1096  curl http://10.98.51.97
+ 1097  curl http://10.98.51.97:5678
+ 1098  history
+
+
+
+kubectl create service loadbalancer my-lbs --tcp=5678:80 -n=rajesh
+
+app=my-dep
+
+ 1100  kubectl create service -h
+ 1101  kubectl create service loadbalancer -h
+ 1102  clear
+ 1103  kubectl create service loadbalancer my-lbs --tcp=5678:80
+ 1104  kubectl delete svc my-lbs
+ 1105  kubectl create service loadbalancer my-lbs --tcp=5678:80 -n=rajesh
+ 1106  kubectl get svc
+ 1107  kubectl get svc -n=rajesh
+ 1108  kubectl edit svc my-lbs -n=rajesh
+ 1109  kubectl describe svc my-lbs -n=rajesh
+ 1110  clear
+ 1111  ls
+ 1112  kubectl get svc -n=rajesh
+ 1113  curl http://10.105.122.172:5678
+ 1114  history
+
+
+
