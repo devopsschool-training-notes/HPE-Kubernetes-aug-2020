@@ -53,14 +53,112 @@ curl http://$INGRESSNODEPORTIP:$NODEPORT/blue --header 'Host: path.example.com'
 https://www.devopsschool.com/blog/kubernetes-basic-ingress-tutorials-with-examples-and-lab-using-nodeport/
 git clone https://github.com/devopsschool-demo-labs-projects/Kubernetes-ingress-tutorials-examples-lab-NodePort-loadbalancer
 
+kubectl get ingresses ingress-single -n=kalpana -o jsonpath='{ .status.loadBalancer.ingress[].ip }'
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-service
+spec:
+  type: ExternalName
+  externalName: test-service.namespacename.svc.cluster.local
 
 
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: my-service
+          servicePort: 80
 
 
 
 
 
 -----------Auth and Auth----------------
+Authentication - How can you login to k8s server?
+https://kubernetes.io/docs/reference/access-authn-authz/authentication/
+ - CERT
+==========================================
+Step 1 - Create a key pair			[YOU]
+
+openssl genrsa -out employee.key 2048
+
+Step 2 - Create a CSR file using pvt key	[YOU]
+openssl req -new -key employee.key -out employee.csr -subj "/CN=employee/O=bitnami"
+
+Step 3 - Send a CSR file to CA authrity(Master)	[YOU]
+
+Step 4 - k8s admin  - would approve CSR and generate crt file. [ ADMIN ]
+openssl x509 -req -in employee.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out employee.crt -days 500
+
+Step 5 - crt file would be sent to YOU and you can use 
+			crt file
+			key file to login k8s 
+================================================
+
+kubectl config set-credentials employee --client-certificate=/home/centos/HPE-Kubernetes-aug-2020/rajesh/auth/employee.crt  --client-key=/home/centos/HPE-Kubernetes-aug-2020/rajesh/auth/employee.key
+
+kubectl config set-context employee-context --cluster=kubernetes --namespace=rajesh --user=employee
+
+kubectl --context=employee-context get pods
+
+===========================================================================
+Authorization
+https://kubernetes.io/docs/reference/access-authn-authz/authorization/
+----------------------
+RBAC 
+
+
+
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  namespace: rajesh
+  name: deployment-manager
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "replicasets", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"] # You can also use ["*"]
+
+
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: deployment-manager-binding
+  namespace: rajesh
+subjects:
+- kind: User
+  name: employee
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: deployment-manager
+  apiGroup: ""
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -----------Networking----------------
 
