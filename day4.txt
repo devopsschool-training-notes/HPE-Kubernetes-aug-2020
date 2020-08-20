@@ -1,0 +1,67 @@
+Work Station - 15.206.185.60
+Worker - 35.154.89.226 and 13.126.46.233
+=================================================
+What is Kubernetes?
+Why Kubernetes?
+Architecutre of Kubernetes?
+How to set Kubernetes clustor?
+-----------------------------
+Namespace
+----------COMPUTE-------------------
+POD
+RC
+Deployment
+-----------STORAGE----------------
+PV
+	emptydir
+	hostpath
+PVC
+-----------DNS service----------------	
+Service
+ingress - TBD
+https://www.devopsschool.com/blog/kubernetes-basic-ingress-tutorials-with-examples-and-lab-using-nodeport/
+https://www.devopsschool.com/blog/kubernetes-ingress-tutorials-with-examples-and-lab-using-loadbalancer/
+
+=============================================
+Step 1- Install ingress controller	 - DONE == NodePort
+
+Step 2 - Deploy PODS		DONE
+
+Step 3 - Expose Deployment with service	- ClustorIP	DONE
+
+Step 4 - Write Ingress rule
+
+
+
+Step 5 - Access a ENDPOINT and see a rule behaviour
+
+INGRESSNODEPORTIP=$(kubectl get ingresses ingress-single -o jsonpath='{ .status.loadBalancer.ingress[].ip }')
+NODEPORT=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath='{ .spec.ports[?(@.name=="http")].nodePort }')
+echo $INGRESSNODEPORTIP:$NODEPORT
+curl http://$INGRESSNODEPORTIP:$NODEPORT
+
+
+
+curl http://$INGRESSNODEPORTIP:$NODEPORT
+
+curl http://$INGRESSNODEPORTIP:$NODEPORT/red  --header 'Host: path.example.com'
+curl http://$INGRESSNODEPORTIP:$NODEPORT/blue --header 'Host: path.example.com'
+
+
+
+------Lab - ---- 30 mins...
+https://www.devopsschool.com/blog/kubernetes-basic-ingress-tutorials-with-examples-and-lab-using-nodeport/
+git clone https://github.com/devopsschool-demo-labs-projects/Kubernetes-ingress-tutorials-examples-lab-NodePort-loadbalancer
+
+
+
+
+
+
+
+
+-----------Auth and Auth----------------
+
+-----------Networking----------------
+
+----Oberserbability-------------
