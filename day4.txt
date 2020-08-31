@@ -1,345 +1,151 @@
-Master
-	API Server -> POD -> Container -> Docker Image -> Google Registry
-	Etcd -> POD -> Container -> Docker Image -> Google Registry
-	Controller Manager -> POD -> Container -> Docker Image -> Google Registry
-	Schedular -> POD -> Container -> Docker Image -> Google Registry
- 	
-	Kubelet
-	Docker
-	Proxy -> POD -> Container -> Docker Image -> Google Registry
-		Network Policy - Weave POD
-Worker
-	Kubelet
-	Docker
-	Proxy -> POD -> Container -> Docker Image -> Google Registry
-		Network Policy - Weave POD
-Workstation
-	kubectl
-		-> config
-			- CURR_DIR/.kube
-			- USER_HOME/.kube	[Default & Recomm ]
-			- ENV KUBECONFIG=pathof .kube
-
-==================
-Master	13.232.125.235
--------
-Docker - https://www.devopsschool.com/tutorial/docker/install-config/docker-install-commuityedition-centos-rhel.html
-Kubeadm
-kubectl
-kubelet
-https://www.devopsschool.com/blog/setting-up-kubernetes-clusters-using-kubeadm-manual-way-in-rhel-7-centos7/
-
-
-Your Kubernetes control-plane has initialized successfully!
-
-==============================WORKSTATION=========================================
-To start using your cluster, you need to run the following as a regular user:
-
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-==============================NETWORK=========================================
-You should now deploy a pod network to the cluster.
-Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-  https://kubernetes.io/docs/concepts/cluster-administration/addons/
-
-
-$ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
-$ kubectl get nodes
-$ kubectl get pods --all-namespaces
-$ kubectl get nodes
-
-==============================WORKER=========================================
-Then you can join any number of worker nodes by running the following on each as root:
-
-kubeadm join 172.31.14.147:6443 --token 73yj3f.may7xnro4itnfkaj \
-    --discovery-token-ca-cert-hash sha256:c518af07cdce7997798b25a12b25c942fcaad9ecabdfe6b2aff39618ee770c26
-
-
-Worker - 15.206.158.29
-
-Workstation
-
-=====================MASTER======================
-
-Angelo Fernandes	13.235.80.185
-Sonal Jain		52.66.245.110
-Venkatesh pattabhi	13.127.231.33
-Amey Walke		15.207.100.206
-Shreyansh Shah		15.206.209.35
-Prasad Dhanala		15.207.111.53
-Vikas Parihar		13.126.99.156
-Shanthesh Kulur Sringeshwara Rao	13.126.46.129
-Adarsh V Nath		13.232.238.249
-Praveen Kumar		13.233.103.72
-Senthilnathan V		35.154.196.83
-Arijit Nath		13.233.131.148
-Ujjwal Kumar Pandey	15.207.221.73
-Sai Kumar		35.154.158.180
-Amandeep		15.207.114.178
-Arun Sathyanarayanan	3.7.253.114	
-Sanjeeva Reddyvandla	13.234.31.69
-Varun Jalihal		15.207.113.212
-Nishant Dalal		3.6.126.185
-Karthik
-
-
-=====================WORKER======================
-
-Angelo Fernandes	13.127.98.206
-Sonal Jain		13.235.128.98
-Venkatesh pattabhi	3.6.40.42
-Amey Walke		13.233.162.212
-Shreyansh Shah		13.233.6.187
-Prasad Dhanala		13.232.220.148
-Vikas Parihar		15.207.106.131
-Shanthesh Kulur Sringeshwara Rao	13.233.167.44
-Adarsh V Nath		13.233.250.136
-Praveen Kumar		13.126.140.180
-Senthilnathan V		13.235.244.196
-Arijit Nath		3.6.87.55	
-Ujjwal Kumar Pandey	52.66.66.251
-Sai Kumar		13.233.85.207
-Amandeep		13.233.168.156
-Arun Sathyanarayanan	13.127.187.65
-Sanjeeva Reddyvandla	13.232.88.9
-Varun Jalihal		13.232.2.33
-Nishant Dalal		13.126.64.236
-Karthik
-
-===================================================================
-===================================================================
-
-Admin - ONE LAPTOP.
-Kubectl -----> Multiple K8s
-===================================
-config.
-	Clustor(S)
-		Clustor1 - http://666.6.6.6.6.66443
-		Clustor2 - http://666.6.6.6.6.66443
-		Clustor3 - http://666.6.6.6.6.66443
-		Clustor4 - http://666.6.6.6.6.66443
-	User(S)
-		User1 - 
-		User2
-		User3 
-		User3 
-	Context(S)
-		Context1 = Clustor1 + User2
-		Context2 = Clustor2 + User3 
-		Context3
-		Context4
-	curr-conext = Context3
-=============================================================
+Work Station - 15.206.185.60
+Worker - 35.154.89.226 and 13.126.46.233
+=================================================
+What is Kubernetes?
+Why Kubernetes?
+Architecutre of Kubernetes?
+How to set Kubernetes clustor?
+-----------------------------
 Namespace
+----------COMPUTE-------------------
+POD
+RC
+Deployment
+-----------STORAGE----------------
+PV
+	emptydir
+	hostpath
+PVC
+-----------DNS service----------------	
+Service
+ingress - TBD
+https://www.devopsschool.com/blog/kubernetes-basic-ingress-tutorials-with-examples-and-lab-using-nodeport/
+https://www.devopsschool.com/blog/kubernetes-ingress-tutorials-with-examples-and-lab-using-loadbalancer/
 
-   7  kubectl get nc
-    8  kubectl get ns
-    9  kubectl get pods ]
-   10  kubectl get pods
-   11  kubectl get pods -n=kube-system
-   12  clear
-   13  history
-=====================================
-API SERVER
-	API	-> ONE FUNCTION == ONE Resource == ONE Obejct
-	SERVER ->  Contains and Manage Multiple API.
+=============================================
+Step 1- Install ingress controller	 - DONE == NodePort
 
-What Can you do with Each API?
-===============================
-	POST GET PUT DELETE
-	CRUD
-		create
-			CMD
-				create
-			YAML
-				create -f
+Step 2 - Deploy PODS		DONE
 
-		Read
-			CMD
-				get
-				describe
-			YAML
+Step 3 - Expose Deployment with service	- ClustorIP	DONE
 
-		update
-			CMD
-				edit
-			YAML
-				apply -f
-
-		delete
-			CMD
-				delete
-			YAML
-				delete f
-
-
-What are the APIS we have in "API SERVER"?
-
-[centos@ip-172-31-14-147 ~]$ kubectl api-resources
-NAME                              SHORTNAMES   APIGROUP                       NAMESPACED   KIND
-bindings                                                                      true         Binding
-componentstatuses                 cs                                          false        ComponentStatus
-configmaps                        cm                                          true         ConfigMap
-endpoints                         ep                                          true         Endpoints
-events                            ev                                          true         Event
-limitranges                       limits                                      true         LimitRange
-namespaces                        ns                                          false        Namespace
-nodes                             no                                          false        Node
-persistentvolumeclaims            pvc                                         true         PersistentVolumeClaim
-persistentvolumes                 pv                                          false        PersistentVolume
-pods                              po                                          true         Pod
-podtemplates                                                                  true         PodTemplate
-replicationcontrollers            rc                                          true         ReplicationController
-resourcequotas                    quota                                       true         ResourceQuota
-secrets                                                                       true         Secret
-serviceaccounts                   sa                                          true         ServiceAccount
-services                          svc                                         true         Service
-mutatingwebhookconfigurations                  admissionregistration.k8s.io   false        MutatingWebhookConfiguration
-validatingwebhookconfigurations                admissionregistration.k8s.io   false        ValidatingWebhookConfiguration
-customresourcedefinitions         crd,crds     apiextensions.k8s.io           false        CustomResourceDefinition
-apiservices                                    apiregistration.k8s.io         false        APIService
-controllerrevisions                            apps                           true         ControllerRevision
-daemonsets                        ds           apps                           true         DaemonSet
-deployments                       deploy       apps                           true         Deployment
-replicasets                       rs           apps                           true         ReplicaSet
-statefulsets                      sts          apps                           true         StatefulSet
-tokenreviews                                   authentication.k8s.io          false        TokenReview
-localsubjectaccessreviews                      authorization.k8s.io           true         LocalSubjectAccessReview
-selfsubjectaccessreviews                       authorization.k8s.io           false        SelfSubjectAccessReview
-selfsubjectrulesreviews                        authorization.k8s.io           false        SelfSubjectRulesReview
-subjectaccessreviews                           authorization.k8s.io           false        SubjectAccessReview
-horizontalpodautoscalers          hpa          autoscaling                    true         HorizontalPodAutoscaler
-cronjobs                          cj           batch                          true         CronJob
-jobs                                           batch                          true         Job
-certificatesigningrequests        csr          certificates.k8s.io            false        CertificateSigningRequest
-leases                                         coordination.k8s.io            true         Lease
-endpointslices                                 discovery.k8s.io               true         EndpointSlice
-events                            ev           events.k8s.io                  true         Event
-ingresses                         ing          extensions                     true         Ingress
-ingressclasses                                 networking.k8s.io              false        IngressClass
-ingresses                         ing          networking.k8s.io              true         Ingress
-networkpolicies                   netpol       networking.k8s.io              true         NetworkPolicy
-runtimeclasses                                 node.k8s.io                    false        RuntimeClass
-poddisruptionbudgets              pdb          policy                         true         PodDisruptionBudget
-podsecuritypolicies               psp          policy                         false        PodSecurityPolicy
-clusterrolebindings                            rbac.authorization.k8s.io      false        ClusterRoleBinding
-clusterroles                                   rbac.authorization.k8s.io      false        ClusterRole
-rolebindings                                   rbac.authorization.k8s.io      true         RoleBinding
-roles                                          rbac.authorization.k8s.io      true         Role
-priorityclasses                   pc           scheduling.k8s.io              false        PriorityClass
-
-==============================================
-GEX  - MS
-	ORDER
-	ms1	- CRUD	- http://5.6.7.7:7888
-	ms2	- CRUD	- http://5.6.7.7:7888
-	ms4	- CRUD	- http://5.6.7.7:7888
-	ACCOUNTING
-	ms4	- CRUD	- http://5.6.7.7:7888
-	ms4	- CRUD	- http://5.6.7.7:7888
-	CATELOG	
-	ms20	- CRUD	- http://5.6.7.7:7888
-
-
-  19  kubectl api-resources
-   20  clear
-   21  kubectl api-resources
-   22  history
-
-====================================================
-
-What do you want?
-- NS
-- POD
-- RC
-- Deployment
-
-
- 26  kubectl get nodes
-   27  clear
-   28  kubectl get ns
-   29  kubectl create ns dev
-   30  kubectl get ns
-   31  kubectl create ns qa
-   32  clear
-   33  kubectl create ns qa
-   34  kubectl get ns
-   35  kubectl describe ns dev
-   36  clear
-   37  kubectl get ns
-   38  kubectl edit ns dev
-   39  clear
-   40  kubectl delete  ns dev
-   41  kubectl get ns
-   42  history
-
-- POD > Container -> Docker Image -> Docker hub
-===============================================
+Step 4 - Write Ingress rule
 
 
 
+Step 5 - Access a ENDPOINT and see a rule behaviour
+
+INGRESSNODEPORTIP=$(kubectl get ingresses ingress-single -o jsonpath='{ .status.loadBalancer.ingress[].ip }')
+NODEPORT=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath='{ .spec.ports[?(@.name=="http")].nodePort }')
+echo $INGRESSNODEPORTIP:$NODEPORT
+curl http://$INGRESSNODEPORTIP:$NODEPORT
+
+
+
+curl http://$INGRESSNODEPORTIP:$NODEPORT
+
+curl http://$INGRESSNODEPORTIP:$NODEPORT/red  --header 'Host: path.example.com'
+curl http://$INGRESSNODEPORTIP:$NODEPORT/blue --header 'Host: path.example.com'
+
+
+
+------Lab - ---- 30 mins...
+https://www.devopsschool.com/blog/kubernetes-basic-ingress-tutorials-with-examples-and-lab-using-nodeport/
+git clone https://github.com/devopsschool-demo-labs-projects/Kubernetes-ingress-tutorials-examples-lab-NodePort-loadbalancer
+
+kubectl get ingresses ingress-single -n=kalpana -o jsonpath='{ .status.loadBalancer.ingress[].ip }'
+
+kind: Service
 apiVersion: v1
-kind: Pod
 metadata:
-  name: hello-pod-rajesh
-  labels: 
-    app: webserver
-    software: rajesh
+  name: my-service
 spec:
-  containers:
-  - name: hello-ctr
-    image: nginx
-    ports:
-    - containerPort: 80
+  type: ExternalName
+  externalName: test-service.namespacename.svc.cluster.local
+
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: my-service
+          servicePort: 80
 
 
 
 
 
- 45  kubectl get ns
-   46  kubectl get pods
-   47  kubectl get pods -n=qa
-   48  kubectl
-   49  kubectl create
-   50  clear
-   51  history
-   52  clear
-   53  kubectl create
-   54  clear
-   55  vi pod.yaml
-   56  kubectl create -f pod.yaml
-   57  kubectl get pods
-   58  kubectl create -f pod.yaml
-   59  kubectl create -f pod.yaml -n=qa
-   60  kubectl get pods
-   61  kubectl get pods -n=qa
-   62  kubectl get pods --all-namespaces
-   63  clear
-   64  kubectl get pods -n=qa
-   65  kubectl get pods -n=qa -o wide
-   66  kubectl describe pod hello-pod-rajesh
-   67  kubectl describe pod hello-pod-rajesh -n=qa
-   68  clear
-   69  kubectl describe pod hello-pod-rajesh -n=qa
-   70  clear
-   71  kubectl get pod -n=qa
-   72  kubectl edit pod hello-pod-rajesh -n=qa
-   73  kubectl describe pod hello-pod-rajesh -n=qa
-   74  clear
-   75  ls
-   76  vi pod.yaml
-   77  kubectl apply -f pod.yaml -n=qa
-   78  kubectl describe pod hello-pod-rajesh -n=qa
-   79  clear
-   80  ls
-   81  kubectl delete pod hello-pod-rajesh
-   82  kubectl get pods
-   83  kubectl get pods -n=qa
-   84  kubectl delete -f pod.yaml -n=qa
-   85  kubectl get pods -n=qa
-   86  history
+-----------Auth and Auth----------------
+Authentication - How can you login to k8s server?
+https://kubernetes.io/docs/reference/access-authn-authz/authentication/
+ - CERT
+==========================================
+Step 1 - Create a key pair			[YOU]
+
+openssl genrsa -out employee.key 2048
+
+Step 2 - Create a CSR file using pvt key	[YOU]
+openssl req -new -key employee.key -out employee.csr -subj "/CN=employee/O=bitnami"
+
+Step 3 - Send a CSR file to CA authrity(Master)	[YOU]
+
+Step 4 - k8s admin  - would approve CSR and generate crt file. [ ADMIN ]
+openssl x509 -req -in employee.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out employee.crt -days 500
+
+Step 5 - crt file would be sent to YOU and you can use 
+			crt file
+			key file to login k8s 
+================================================
+
+kubectl config set-credentials employee --client-certificate=/home/centos/HPE-Kubernetes-aug-2020/rajesh/auth/employee.crt  --client-key=/home/centos/HPE-Kubernetes-aug-2020/rajesh/auth/employee.key
+
+kubectl config set-context employee-context --cluster=kubernetes --namespace=rajesh --user=employee
+
+kubectl --context=employee-context get pods
+
+===========================================================================
+Authorization
+https://kubernetes.io/docs/reference/access-authn-authz/authorization/
+----------------------
+RBAC 
+
+
+
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  namespace: rajesh
+  name: deployment-manager
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "replicasets", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"] # You can also use ["*"]
+
+
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: deployment-manager-binding
+  namespace: rajesh
+subjects:
+- kind: User
+  name: employee
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: deployment-manager
+  apiGroup: ""
 
 
 
@@ -352,3 +158,8 @@ spec:
 
 
 
+
+
+-----------Networking----------------
+
+----Oberserbability-------------
